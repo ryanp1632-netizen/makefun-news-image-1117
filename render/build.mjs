@@ -41,7 +41,7 @@ const cardHtml = CARDS.map((s) => `
     </div>
   </article>`).join('');
 
-const alsoHtml = ALSO.map((a) => `<li><span class="glyph">${art.GLYPHS[a.icon]()}</span>${esc(a.text)}</li>`).join('');
+const alsoHtml = ALSO.map((a) => `<li><span class="glyph">${art.GLYPHS[a.icon]()}</span><span><b>${esc(a.where)}:</b> ${esc(a.text)}</span></li>`).join('');
 
 const pins = [
   ...LEADS.map((s) => ({ ...s, color: LEAD_RED })),
@@ -63,35 +63,39 @@ const html = `<!doctype html>
   .top { display: flex; justify-content: space-between; align-items: baseline; font-size: 13px; font-weight: 800; letter-spacing: 1.2px; text-transform: uppercase; }
   .top .kicker { color: ${LEAD_RED}; }
   .top .count { color: #475569; }
-  h1 { font-family: 'Segoe UI Black', 'Segoe UI', Arial, sans-serif; font-weight: 900; font-size: 52px; line-height: 1; letter-spacing: -0.5px; margin: 3px 0 7px; color: #0f1d3a; }
-  .rule { height: 4px; background: #0f1d3a; margin-bottom: 9px; }
+  h1 { font-family: 'Segoe UI Black', 'Segoe UI', Arial, sans-serif; font-weight: 900; font-size: 52px; line-height: 1; letter-spacing: -0.5px; margin: 2px 0 5px; color: #0f1d3a; }
+  .rule { height: 4px; background: #0f1d3a; margin-bottom: 8px; }
   .leads { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
   .lead { background: #fff; border-radius: 6px; overflow: hidden; box-shadow: 0 1px 2px rgba(15,23,42,.12); }
   .lead .art svg { display: block; width: 100%; height: auto; }
-  .lead .body { padding: 8px 11px 10px; }
+  .lead .body { padding: 7px 11px 8px; }
   .tag { display: flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 800; letter-spacing: .8px; text-transform: uppercase; color: ${LEAD_RED}; }
   .card .tag { color: ${CARD_BLUE}; font-size: 10px; }
   .num { display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; border-radius: 50%; color: #fff; font-size: 11px; font-weight: 800; letter-spacing: 0; }
   .num.red { background: ${LEAD_RED}; } .num.blue { background: ${CARD_BLUE}; width: 16px; height: 16px; font-size: 9.5px; }
   h2 { font-size: 21px; line-height: 1.12; font-weight: 800; margin: 5px 0 4px; letter-spacing: -0.2px; }
   .lead p { font-size: 12.5px; line-height: 1.3; color: #334155; }
-  .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 7px 12px; margin-top: 8px; }
-  .card { background: #fff; border-radius: 6px; display: flex; gap: 9px; padding: 7px 9px; box-shadow: 0 1px 2px rgba(15,23,42,.12); }
+  .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px 12px; margin-top: 7px; }
+  .card { background: #fff; border-radius: 6px; display: flex; gap: 9px; padding: 5px 9px; box-shadow: 0 1px 2px rgba(15,23,42,.12); }
   .card .icon svg { width: 56px; height: 56px; display: block; }
   h3 { font-size: 15px; line-height: 1.15; font-weight: 800; margin: 2px 0 2px; }
-  .card p { font-size: 11.5px; line-height: 1.25; color: #475569; }
-  .bottom { display: grid; grid-template-columns: ${MAP_W + 16}px 1fr; gap: 12px; margin-top: 8px; }
-  .panel { background: #fff; border-radius: 6px; padding: 8px; box-shadow: 0 1px 2px rgba(15,23,42,.12); }
+  .card p { font-size: 11px; line-height: 1.22; color: #475569; }
+  .bottom { display: grid; grid-template-columns: ${MAP_W + 16}px 1fr; gap: 12px; margin-top: 7px; }
+  .panel { background: #fff; border-radius: 6px; padding: 7px 8px; box-shadow: 0 1px 2px rgba(15,23,42,.12); }
   .panel h4 { font-size: 11px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; color: #475569; display: flex; justify-content: space-between; margin-bottom: 5px; }
   .panel h4 .hint { font-weight: 700; letter-spacing: .3px; text-transform: none; color: #64748b; }
   .key { display: inline-block; width: 8px; height: 8px; border-radius: 50%; vertical-align: middle; margin: 0 2px 0 6px; }
   .map svg { display: block; border-radius: 4px; }
-  ul { list-style: none; columns: 2; column-gap: 14px; }
-  li { display: flex; align-items: center; gap: 7px; font-size: 12px; font-weight: 600; line-height: 1; padding: 2.4px 0; border-bottom: 1px solid #eef0f3; white-space: nowrap; break-inside: avoid; }
+  ul { list-style: none; columns: 2; column-gap: 12px; }
+  li { display: flex; align-items: center; gap: 6px; font-size: 11.5px; font-weight: 500; line-height: 1; padding: 1.2px 0; border-bottom: 1px solid #eef0f3; white-space: nowrap; break-inside: avoid; }
   li:last-child { border-bottom: 0; }
-  .glyph svg { display: block; width: 15px; height: 15px; }
+  li b { font-weight: 800; color: #0f1d3a; }
+  .glyph svg { display: block; width: 14px; height: 14px; }
   .also h4 { color: ${LEAD_RED}; }
-  footer { text-align: center; font-size: 10.5px; color: #64748b; margin-top: 6px; }
+  .map { display: flex; flex-direction: column; }
+  .legend { font-size: 10.5px; font-weight: 700; color: #334155; margin: 7px 0 0; }
+  .legend .key:first-child { margin-left: 0; }
+  .src { margin-top: auto; font-size: 10.5px; line-height: 1.35; color: #64748b; border-top: 1px solid #eef0f3; padding-top: 5px; }
 </style></head><body>
   <div class="top"><span class="kicker">The world’s news in one picture</span><span class="count">${storyCount} stories · 6 continents</span></div>
   <h1>${DAY.weekday.toUpperCase()} ${DAY.date.toUpperCase()}</h1>
@@ -99,10 +103,11 @@ const html = `<!doctype html>
   <section class="leads">${leadHtml}</section>
   <section class="cards">${cardHtml}</section>
   <section class="bottom">
-    <div class="panel map"><h4>Where it happened <span class="hint">Numbers match the stories<span class="key" style="background:#f59e0b"></span>also</span></h4>${map}</div>
+    <div class="panel map"><h4>Where it happened <span class="hint">Numbers match the stories<span class="key" style="background:#f59e0b"></span>also</span></h4>${map}
+      <div class="legend"><span class="key" style="background:${LEAD_RED}"></span>Lead stories 1–3<span class="key" style="background:${CARD_BLUE}"></span>Stories 4–12<span class="key" style="background:#f59e0b"></span>Also on ${DAY.short}</div>
+      <p class="src">${esc(SOURCES)}. Every story happened or was announced on ${DAY.weekday} ${DAY.date}. Words and drawings are our own, made in code.</p></div>
     <div class="panel also"><h4>Also on ${DAY.short}</h4><ul>${alsoHtml}</ul></div>
   </section>
-  <footer>${esc(SOURCES)}. Drawn in code; every story reported on the day.</footer>
 </body></html>`;
 
 const pagePath = join(outDir, 'page.html');
