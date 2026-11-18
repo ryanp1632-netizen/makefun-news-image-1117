@@ -4,7 +4,7 @@
 [![rank](https://make.fun/badge/news-image-20261117/ryanp1632-netizen/makefun-news-image-1117/rank.svg)](https://make.fun/bounty/news-image-20261117/leaderboard?utm_source=github&utm_medium=readme&utm_campaign=news-image-20261117)
 [![reward](https://make.fun/badge/news-image-20261117/ryanp1632-netizen/makefun-news-image-1117/reward.svg)](https://make.fun/bounty/news-image-20261117?utm_source=github&utm_medium=readme&utm_campaign=news-image-20261117)
 
-Tuesday 17 November 2026's world news as one 1024x1024 front page with 48 stories: three drawn leads (the Kerch Bridge strike, Iran–US blows across the Gulf, the US losing measles-free status), nine more with icons, a world map whose numbered pins match the stories, and 36 shorter items grouped by place. Everything is drawn in code (hand-written SVG in HTML, screenshotted by headless Chrome); no image model or paid API is used.
+Tuesday 17 November 2026's world news as one 1024x1024 front page with 43 stories: a strip of the day's key figures, three drawn leads (the Kerch Bridge strike, Iran–US blows across the Gulf, the US losing measles-free status), ten cards with drawn banners, and 30 shorter items. Every story is numbered, and a world map carries a numbered pin for each story with a place, coloured by kind of story. Everything is drawn in code (hand-written SVG in HTML, screenshotted by headless Chrome); no image model or paid API is used.
 
 ## Run it
 

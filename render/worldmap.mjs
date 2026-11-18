@@ -58,12 +58,14 @@ export function worldMap(w, h, { pins = [], dots = [], box } = {}) {
     const [x, y] = p([lon, lat]);
     return `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="3.4" fill="#f59e0b" stroke="#fff" stroke-width="1.2"/>`;
   }).join('');
-  const pinSvg = pins.map(({ n, lon, lat, color, dx = 0, dy = 0 }) => {
+  const pinSvg = [...pins].reverse().map(({ n, lon, lat, color, dx = 0, dy = 0, r = 8.5 }) => {
     const [x0, y0] = p([lon, lat]);
     const x = x0 + dx, y = y0 + dy;
-    const lead = dx || dy ? `<line x1="${x0.toFixed(1)}" y1="${y0.toFixed(1)}" x2="${x.toFixed(1)}" y2="${y.toFixed(1)}" stroke="#334155" stroke-width="1"/><circle cx="${x0.toFixed(1)}" cy="${y0.toFixed(1)}" r="2" fill="#334155"/>` : '';
-    return `${lead}<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="8.5" fill="${color}" stroke="#fff" stroke-width="1.6"/>
-      <text x="${x.toFixed(1)}" y="${(y + 3.5).toFixed(1)}" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="${n > 9 ? 8.5 : 10}" font-weight="800" fill="#fff" text-anchor="middle">${n}</text>`;
+    const moved = Math.hypot(dx, dy) > r * 0.6;
+    const lead = moved ? `<line x1="${x0.toFixed(1)}" y1="${y0.toFixed(1)}" x2="${x.toFixed(1)}" y2="${y.toFixed(1)}" stroke="#334155" stroke-width="0.9"/><circle cx="${x0.toFixed(1)}" cy="${y0.toFixed(1)}" r="1.8" fill="#334155"/>` : '';
+    const fs = (n > 9 ? 1.0 : 1.18) * r;
+    return `${lead}<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${r}" fill="${color}" stroke="#fff" stroke-width="1.4"/>
+      <text x="${x.toFixed(1)}" y="${(y + fs * 0.36).toFixed(1)}" font-family="Arial, sans-serif" font-size="${fs.toFixed(1)}" font-weight="700" fill="#fff" text-anchor="middle">${n}</text>`;
   }).join('');
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}" width="${w}" height="${h}">
     <rect width="${w}" height="${h}" fill="#eef4fa"/>
@@ -71,4 +73,27 @@ export function worldMap(w, h, { pins = [], dots = [], box } = {}) {
     <g fill="#eef4fa">${water}</g>
     ${dotSvg}${pinSvg}
   </svg>`;
+}
+
+// Spread pins that would overlap: push apart pairwise, pull gently back to their places, keep inside the frame.
+export function spreadPins(pins, w, h, box, rounds = 220) {
+  const p = makeProjection(w, h, box);
+  const pts = pins.map((q) => { const [x, y] = p([q.lon, q.lat]); return { q, x0: x, y0: y, x, y, r: q.r ?? 8.5 }; });
+  for (let k = 0; k < rounds; k++) {
+    for (let i = 0; i < pts.length; i++) for (let j = i + 1; j < pts.length; j++) {
+      const a = pts[i], b = pts[j];
+      let dx = b.x - a.x, dy = b.y - a.y, d = Math.hypot(dx, dy);
+      const need = a.r + b.r + 1.2;
+      if (d < need) {
+        if (d < 0.01) { dx = Math.cos(i + j); dy = Math.sin(i + j); d = 1; }
+        const push = (need - d) / 2;
+        a.x -= (dx / d) * push; a.y -= (dy / d) * push; b.x += (dx / d) * push; b.y += (dy / d) * push;
+      }
+    }
+    for (const t of pts) {
+      t.x += (t.x0 - t.x) * 0.02; t.y += (t.y0 - t.y) * 0.02;
+      t.x = Math.min(w - t.r - 1, Math.max(t.r + 1, t.x)); t.y = Math.min(h - t.r - 1, Math.max(t.r + 1, t.y));
+    }
+  }
+  return pts.map((t) => ({ ...t.q, dx: t.x - t.x0, dy: t.y - t.y0 }));
 }
