@@ -51,8 +51,9 @@ const pins = [
 const nudge = { 1: { dx: 8, dy: -10 }, 2: { dx: 10, dy: 6 }, 5: { dx: -12, dy: 6 }, 9: { dx: -6, dy: 10 }, 7: { dx: -10, dy: -8 }, 8: { dx: 4, dy: -12 } };
 for (const p of pins) Object.assign(p, nudge[p.n] ?? {});
 const dots = ALSO.filter((a) => a.lat || a.lon);
-const MAP_W = 452, MAP_H = 212;
-const map = worldMap(MAP_W, MAP_H, { pins, dots });
+// Crop to the inhabited latitudes and the longitudes the stories span, so the pins spread out.
+const MAP_W = 340, MAP_H = 206;
+const map = worldMap(MAP_W, MAP_H, { pins, dots, box: { west: -136, east: 160, north: 70, south: -42 } });
 
 const html = `<!doctype html>
 <html><head><meta charset="utf-8"><style>
@@ -85,8 +86,8 @@ const html = `<!doctype html>
   .panel h4 .hint { font-weight: 700; letter-spacing: .3px; text-transform: none; color: #64748b; }
   .key { display: inline-block; width: 8px; height: 8px; border-radius: 50%; vertical-align: middle; margin: 0 2px 0 6px; }
   .map svg { display: block; border-radius: 4px; }
-  ul { list-style: none; }
-  li { display: flex; align-items: center; gap: 7px; font-size: 12.5px; font-weight: 600; line-height: 1; padding: 2px 0; border-bottom: 1px solid #eef0f3; white-space: nowrap; }
+  ul { list-style: none; columns: 2; column-gap: 14px; }
+  li { display: flex; align-items: center; gap: 7px; font-size: 12px; font-weight: 600; line-height: 1; padding: 2.4px 0; border-bottom: 1px solid #eef0f3; white-space: nowrap; break-inside: avoid; }
   li:last-child { border-bottom: 0; }
   .glyph svg { display: block; width: 15px; height: 15px; }
   .also h4 { color: ${LEAD_RED}; }

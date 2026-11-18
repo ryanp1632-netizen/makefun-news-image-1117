@@ -251,5 +251,13 @@ export const GLYPHS = {
   car: () => g(`<path d="M2 10 L3.5 6 Q4 5 5 5 L11 5 Q12 5 12.5 6 L14 10 L14 13 L2 13Z" fill="#334155"/><rect x="5" y="2" width="6" height="3" rx="1" fill="#94a3b8"/><circle cx="5" cy="13" r="1.8" fill="#0f172a"/><circle cx="11" cy="13" r="1.8" fill="#0f172a"/><rect x="4" y="7" width="8" height="2" fill="#93c5fd"/>`),
   globe: () => g(`<circle cx="8" cy="8" r="7" fill="#3b82f6"/><path d="M4 4 Q7 3 7 7 Q5 9 3 8Z M9 9 Q12 8 13 11 Q10 14 9 12Z" fill="#86efac"/>`),
   ball: () => g(`<circle cx="8" cy="8" r="7" fill="#fff" stroke="#0f172a" stroke-width="1.2"/><path d="M8 5 L11 7 L10 10.5 L6 10.5 L5 7Z" fill="#0f172a"/>`),
+  plane: () => g(`<path d="M8 1 L9.2 6 L15 9 L15 10.5 L9.2 8.6 L9 13 L11 14.5 L11 15.5 L8 14.6 L5 15.5 L5 14.5 L7 13 L6.8 8.6 L1 10.5 L1 9 L6.8 6Z" fill="#1d4ed8"/>`),
+  bank: () => g(`<path d="M1 6 L8 1.5 L15 6Z" fill="#334155"/><path d="M3 7 v5 M6.3 7 v5 M9.7 7 v5 M13 7 v5" stroke="#334155" stroke-width="1.8"/><rect x="1" y="13" width="14" height="2" fill="#334155"/>`),
+  dice: () => g(`<rect x="1.5" y="1.5" width="13" height="13" rx="3" fill="#7c3aed"/><circle cx="5" cy="5" r="1.4" fill="#fff"/><circle cx="8" cy="8" r="1.4" fill="#fff"/><circle cx="11" cy="11" r="1.4" fill="#fff"/>`),
+  chart: () => g(`<rect x="1" y="9" width="3" height="6" fill="#94a3b8"/><rect x="6" y="5" width="3" height="10" fill="#94a3b8"/><rect x="11" y="7" width="3" height="8" fill="#16a34a"/><path d="M1 4 L7 2 L14 5" stroke="#16a34a" stroke-width="1.4" fill="none"/>`),
+  people: () => g(`<circle cx="5" cy="5" r="2.5" fill="#00209f"/><circle cx="11" cy="5" r="2.5" fill="#d21034"/><path d="M1 15 Q1 9 5 9 Q9 9 9 15Z" fill="#00209f"/><path d="M7 15 Q7 9 11 9 Q15 9 15 15Z" fill="#d21034"/>`),
+  leaf: () => g(`<path d="M2 14 Q2 2 14 2 Q14 14 2 14Z" fill="#16a34a"/><path d="M2 14 L11 5" stroke="#bbf7d0" stroke-width="1.2"/>`),
+  robot: () => g(`<rect x="3" y="4" width="10" height="9" rx="2" fill="#475569"/><circle cx="6.2" cy="8" r="1.4" fill="#fde047"/><circle cx="9.8" cy="8" r="1.4" fill="#fde047"/><path d="M8 1 v3" stroke="#475569" stroke-width="1.4"/><path d="M6 11 h4" stroke="#fff" stroke-width="1"/>`),
+  golf: () => g(`<path d="M5 1 v13" stroke="#334155" stroke-width="1.4"/><path d="M5.7 1.5 L13 4 L5.7 6.5Z" fill="#dc2626"/><ellipse cx="7" cy="14.2" rx="6" ry="1.6" fill="#16a34a"/><circle cx="11" cy="12.4" r="1.4" fill="#fff" stroke="#94a3b8" stroke-width="0.5"/>`),
   star: () => g(`<rect width="16" height="16" rx="3" fill="#1e293b"/><path d="M14 2 L5 11" stroke="#fde68a" stroke-width="1.6"/><circle cx="4.5" cy="11.5" r="2" fill="#fef9c3"/><circle cx="12" cy="12" r="0.8" fill="#fff"/><circle cx="3" cy="4" r="0.7" fill="#fff"/>`),
 };

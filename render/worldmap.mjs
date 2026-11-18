@@ -49,8 +49,8 @@ export function makeProjection(w, h, box = { west: -170, east: 180, north: 78, s
   return ([lon, lat]) => [(lon - box.west) * sx, (box.north - lat) * sy];
 }
 
-export function worldMap(w, h, { pins = [], dots = [] } = {}) {
-  const p = makeProjection(w, h);
+export function worldMap(w, h, { pins = [], dots = [], box } = {}) {
+  const p = makeProjection(w, h, box);
   const path = (ring) => 'M' + ring.map((pt) => p(pt).map((v) => v.toFixed(1)).join(' ')).join(' L') + ' Z';
   const land = LAND.map((r) => `<path d="${path(r)}"/>`).join('');
   const water = WATER.map((r) => `<path d="${path(r)}"/>`).join('');
